@@ -74,14 +74,14 @@ const ServiceCard = ({
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{ 
-        y: -8, 
+      whileHover={{
+        y: -8,
         scale: 1.02,
-        transition: { duration: 0.3, ease: "easeOut" }
+        transition: { duration: 0.3, ease: 'easeOut' },
       }}
-      whileTap={{ 
+      whileTap={{
         scale: 0.98,
-        transition: { duration: 0.1 }
+        transition: { duration: 0.1 },
       }}
       transition={{ duration: 0.8, delay: index * 0.1 }}
       viewport={{ once: true }}
@@ -99,16 +99,16 @@ const ServiceCard = ({
             alt={service.title}
             className='w-full h-full object-cover transition-transform duration-300'
             whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
           />
         ) : (
-          <motion.div 
+          <motion.div
             className='w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center transition-transform duration-300'
             whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
           >
             <div className='text-center text-gray-500'>
-              <motion.div 
+              <motion.div
                 className='w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 bg-gray-300 rounded-lg flex items-center justify-center'
                 whileHover={{ rotate: 5, scale: 1.1 }}
                 transition={{ duration: 0.3 }}

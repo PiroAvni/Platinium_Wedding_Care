@@ -13,7 +13,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router basename="/Platinium_Wedding_Care">
+    <Router basename='/Platinium_Wedding_Care'>
       <div className='min-h-screen bg-white text-gray-900 flex flex-col'>
         <Header />
 
