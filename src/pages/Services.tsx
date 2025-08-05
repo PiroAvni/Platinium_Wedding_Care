@@ -9,7 +9,6 @@ const Services = () => {
       name: 'Wedding Dress Cleaning',
       description:
         'Professional cleaning and preservation of your precious wedding dress',
-      price: 'From £89',
       duration: '3-5 days',
       features: [
         'Stain removal (food, makeup, grass, etc.)',
@@ -26,7 +25,6 @@ const Services = () => {
       name: "Groom's Suit Care",
       description:
         'Expert cleaning and pressing for morning suits, tuxedos, and formal wear',
-      price: 'From £45',
       duration: '2-3 days',
       features: [
         'Professional dry cleaning',
@@ -43,7 +41,6 @@ const Services = () => {
       name: 'Wedding Shoe Cleaning',
       description:
         'Specialized cleaning for satin, leather, and delicate shoe materials',
-      price: 'From £25',
       duration: '1-2 days',
       features: [
         'Satin and silk shoe cleaning',
@@ -60,7 +57,6 @@ const Services = () => {
       name: 'Wedding Accessories',
       description:
         'Careful cleaning of veils, gloves, ties, and other wedding accessories',
-      price: 'From £15',
       duration: '1-2 days',
       features: [
         'Veil cleaning and pressing',
@@ -77,7 +73,6 @@ const Services = () => {
       name: 'Bridesmaids Dresses',
       description:
         'Group cleaning services for bridesmaids dresses with special rates',
-      price: 'From £35 each',
       duration: '2-3 days',
       features: [
         'Group discounts available',
@@ -94,7 +89,6 @@ const Services = () => {
       name: 'Restoration Services',
       description:
         'Expert restoration for vintage and damaged wedding garments',
-      price: 'Quote on request',
       duration: '1-2 weeks',
       features: [
         'Vintage dress restoration',
@@ -114,25 +108,21 @@ const Services = () => {
       title: 'Express Service',
       description:
         'Same-day and next-day service available for urgent requests',
-      price: '+50% surcharge',
     },
     {
       icon: <Shield className='w-6 h-6' />,
       title: 'Insurance Coverage',
       description: 'All garments insured up to £2000 during our care',
-      price: 'Included',
     },
     {
       icon: <Truck className='w-6 h-6' />,
       title: 'Collection & Delivery',
       description: 'Free collection and delivery within M25 area',
-      price: 'Free',
     },
     {
       icon: <Star className='w-6 h-6' />,
       title: 'Quality Guarantee',
       description: '100% satisfaction guarantee on all cleaning services',
-      price: 'Included',
     },
   ];
 
@@ -184,9 +174,6 @@ const Services = () => {
                       {service.name}
                     </h3>
                     <div className='text-right'>
-                      <div className='text-2xl font-bold text-gray-900'>
-                        {service.price}
-                      </div>
                       <div className='text-sm text-gray-500'>
                         {service.duration}
                       </div>
@@ -260,9 +247,6 @@ const Services = () => {
                 <p className='text-gray-600 mb-4 text-sm'>
                   {service.description}
                 </p>
-                <div className='text-lg font-semibold text-gray-900'>
-                  {service.price}
-                </div>
               </motion.div>
             ))}
           </div>
