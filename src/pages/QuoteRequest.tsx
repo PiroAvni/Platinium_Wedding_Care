@@ -135,6 +135,14 @@ const QuoteRequest = () => {
   };
 
   const sendToWhatsApp = () => {
+    // Basic validation
+    if (!formData.customerName || !formData.email || !formData.serviceType) {
+      alert(
+        'Please fill in your name, email, and service type before sending to WhatsApp'
+      );
+      return;
+    }
+
     const message = `Hi! I'd like to request a quote for:
 Service: ${formData.serviceType}
 Name: ${formData.customerName}
@@ -148,6 +156,8 @@ I have ${uploadedImages.length} image(s) to share.`;
       /[^0-9]/g,
       ''
     )}?text=${encodeURIComponent(message)}`;
+
+    console.log('WhatsApp URL:', whatsappUrl); // Debug log
     window.open(whatsappUrl, '_blank');
   };
 
@@ -498,7 +508,7 @@ I have ${uploadedImages.length} image(s) to share.`;
                 className='flex items-center justify-center space-x-2 text-gray-900 hover:text-gray-600 font-medium'
               >
                 <Phone className='w-5 h-5' />
-                <span>Call: +44 7123 456 789</span>
+                <span>`Call: ${contactData.phone}`</span>
               </a>
               <a
                 href={`https://wa.me/${contactData.whatsapp.replace(
