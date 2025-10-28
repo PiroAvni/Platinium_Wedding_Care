@@ -325,7 +325,10 @@ const Contact = () => {
                     Call Now: +44 7123 456 789
                   </a>
                   <a
-                    href={`https://wa.me/${contactData.whatsapp.replace(/[^0-9]/g, '')}`}
+                    href={`https://wa.me/${contactData.whatsapp.replace(
+                      /[^0-9]/g,
+                      ''
+                    )}`}
                     target='_blank'
                     rel='noopener noreferrer'
                     className='block w-full bg-green-600 text-white py-3 rounded-lg font-medium text-center hover:bg-green-700 transition-colors'

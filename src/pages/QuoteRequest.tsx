@@ -501,7 +501,10 @@ I have ${uploadedImages.length} image(s) to share.`;
                 <span>Call: +44 7123 456 789</span>
               </a>
               <a
-                href={`https://wa.me/${contactData.whatsapp.replace(/[^0-9]/g, '')}`}
+                href={`https://wa.me/${contactData.whatsapp.replace(
+                  /[^0-9]/g,
+                  ''
+                )}`}
                 target='_blank'
                 rel='noopener noreferrer'
                 className='flex items-center justify-center space-x-2 text-green-600 hover:text-green-700 font-medium'
