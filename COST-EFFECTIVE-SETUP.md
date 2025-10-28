@@ -1,4 +1,5 @@
 # 💰 COST-EFFECTIVE SETUP GUIDE
+
 ## 100% Free Solution for Small Business
 
 This guide shows you how to set up a **completely free** content management system for your wedding dress cleaning website.
@@ -25,7 +26,7 @@ This guide shows you how to set up a **completely free** content management syst
 ### STEP 1: Enable Netlify Identity (5 min)
 
 1. **Deploy to Netlify** (free account):
-   - Go to: https://app.netlify.com
+   - Go to: <https://app.netlify.com>
    - Click "Add new site" → "Import from Git"
    - Connect GitHub account
    - Select `Platinium_Wedding_Care` repository
@@ -51,13 +52,14 @@ This guide shows you how to set up a **completely free** content management syst
 ### STEP 3: Google Reviews Setup (10 min) - OPTIONAL
 
 **Free Tier Limits:**
+
 - 300 API requests per day
 - More than enough for a small business
 
 **Setup:**
 
 1. **Create Google Cloud account** (free):
-   - https://console.cloud.google.com
+   - <https://console.cloud.google.com>
    - No credit card needed for free tier
 
 2. **Enable Places API**:
@@ -70,6 +72,7 @@ This guide shows you how to set up a **completely free** content management syst
    - Copy the key
 
 4. **Restrict the key** (important for free tier):
+
    ```
    Application restrictions:
    - HTTP referrers (websites)
@@ -83,6 +86,7 @@ This guide shows you how to set up a **completely free** content management syst
 5. **Add to Netlify**:
    - Site settings → Environment variables
    - Add:
+
      ```
      VITE_GOOGLE_PLACES_API_KEY = your_key_here
      VITE_GOOGLE_PLACE_ID = your_place_id_here
@@ -94,7 +98,7 @@ This guide shows you how to set up a **completely free** content management syst
 
 **Using Formspree (Free tier: 50 submissions/month)**
 
-1. Sign up: https://formspree.io (free)
+1. Sign up: <https://formspree.io> (free)
 2. Create new form
 3. Copy form endpoint
 4. Update contact form (I can help with this)
@@ -102,6 +106,7 @@ This guide shows you how to set up a **completely free** content management syst
 **Alternative: Netlify Forms** (100 submissions/month free)
 
 Just add `netlify` attribute to form:
+
 ```html
 <form netlify name="contact">
   <!-- form fields -->
@@ -112,11 +117,12 @@ Just add `netlify` attribute to form:
 
 **Option A: Cloudinary (Free tier: 25GB storage)**
 
-1. Sign up: https://cloudinary.com (free)
+1. Sign up: <https://cloudinary.com> (free)
 2. Get cloud name
 3. Use upload widget (no backend needed)
 
 **Option B: Keep images in Git (Current setup)**
+
 - Simple, no extra service
 - Good for small number of images
 - Already working ✅
@@ -125,7 +131,7 @@ Just add `netlify` attribute to form:
 
 ## 📝 HOW TO USE THE CMS
 
-### Adding a Service:
+### Adding a Service
 
 1. Go to `/admin`
 2. Click "Services" → "New Service"
@@ -137,7 +143,7 @@ Just add `netlify` attribute to form:
 4. Click "Publish"
 5. Changes appear on site automatically!
 
-### Adding a Testimonial:
+### Adding a Testimonial
 
 1. Click "Testimonials" → "New Testimonial"
 2. Enter customer details
@@ -145,13 +151,13 @@ Just add `netlify` attribute to form:
 4. Set rating (1-5 stars)
 5. Publish!
 
-### Updating Contact Info:
+### Updating Contact Info
 
 1. Click "Site Settings" → "Contact Information"
 2. Update phone, email, WhatsApp
 3. Save & publish
 
-### Adding Gallery Images:
+### Adding Gallery Images
 
 1. Click "Gallery" → "New Gallery Item"
 2. Upload before & after photos
@@ -192,20 +198,23 @@ Current code has hardcoded phone number. **Move to CMS settings** so you can cha
 
 ## 📈 SCALING (When Business Grows)
 
-### Current Free Setup Handles:
+### Current Free Setup Handles
+
 - ✅ 100,000+ page views/month
 - ✅ Unlimited image storage (in Git)
 - ✅ 100 form submissions/month (Netlify)
 - ✅ 300 Google review fetches/day
 
-### If You Outgrow Free Tier:
+### If You Outgrow Free Tier
 
 **Netlify Pro** ($19/month):
+
 - 400 form submissions/month
 - More build minutes
 - Analytics included
 
 **Cloudinary Pro** ($89/month):
+
 - 100GB image storage
 - Advanced transformations
 - Video support
@@ -216,14 +225,16 @@ Current code has hardcoded phone number. **Move to CMS settings** so you can cha
 
 ## 🎯 RECOMMENDED SETUP FOR YOU
 
-### ✅ Use Now (All Free):
+### ✅ Use Now (All Free)
+
 1. **Netlify CMS** - Content management
 2. **GitHub Pages** OR **Netlify** - Hosting (both free)
 3. **Formspree** - Contact forms (50/month free)
 4. **Google Reviews API** - Live reviews (300/day free)
 5. **Git Storage** - Images (unlimited free)
 
-### ⏰ Add Later (When Needed):
+### ⏰ Add Later (When Needed)
+
 - Cloudinary (if you need 100+ images)
 - Google Analytics (free)
 - Email automation (many free options)
@@ -235,6 +246,7 @@ Current code has hardcoded phone number. **Move to CMS settings** so you can cha
 The current `/admin` page in your code is **not secure** and should be removed since Netlify CMS provides a real admin panel.
 
 **I can:**
+
 1. Remove the fake admin panel
 2. Set up Netlify CMS properly
 3. Connect settings to CMS
@@ -267,11 +279,13 @@ The current `/admin` page in your code is **not secure** and should be removed s
 **Monthly:** $0  
 **Annual:** $0  
 
-**Hidden Costs:** 
+**Hidden Costs:**
+
 - Your time to learn CMS: ~1 hour
 - My time to set up: Already done! ✅
 
 **Business Value:**
+
 - Save $300-500/year on hosting
 - Save $1000+/year on developer time
 - Update content yourself anytime

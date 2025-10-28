@@ -149,8 +149,8 @@ const Contact = () => {
               <h2 className='text-3xl font-serif font-bold text-gray-900 mb-6'>
                 Send Us a Message
               </h2>
-              <form 
-                onSubmit={handleSubmit} 
+              <form
+                onSubmit={handleSubmit}
                 className='space-y-6'
                 name='contact'
                 method='POST'
@@ -161,7 +161,8 @@ const Contact = () => {
                 <input type='hidden' name='form-name' value='contact' />
                 <p className='hidden'>
                   <label>
-                    Don't fill this out if you're human: <input name='bot-field' />
+                    Don't fill this out if you're human:{' '}
+                    <input name='bot-field' />
                   </label>
                 </p>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>

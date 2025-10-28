@@ -3,6 +3,7 @@
 ## 🎯 Complete Setup for Wedding Dress Website
 
 This guide will walk you through deploying your wedding dress cleaning website to Netlify with:
+
 - ✅ **Free Hosting** - Unlimited bandwidth
 - ✅ **Free CMS** - Netlify CMS for content management
 - ✅ **Free Forms** - 100 form submissions per month
@@ -37,10 +38,12 @@ This guide will walk you through deploying your wedding dress cleaning website t
 3. Authorize Netlify to access your repositories
 4. Select your repository: `Platinium_Wedding_Care`
 5. Configure build settings:
+
    ```
    Build command: npm run build
    Publish directory: dist
    ```
+
 6. Click **"Deploy site"**
 
 ⏱️ **Wait 2-3 minutes** for initial deployment to complete.
@@ -111,6 +114,7 @@ That's it! Netlify automatically handles GitHub authentication.
 4. **You're in!** 🎉
 
 **Who can access:**
+
 - Anyone with **write access** to your GitHub repository
 - To add editors: Add them as collaborators on GitHub
 
@@ -147,6 +151,7 @@ Your CMS has these content sections:
 5. Click **"Publish"** → **"Publish now"**
 
 **What happens next:**
+
 - CMS saves changes to GitHub
 - Netlify detects GitHub update
 - Site automatically rebuilds (2-3 minutes)
@@ -178,6 +183,7 @@ Your CMS has these content sections:
    - Confirm deletion
 
 **Image requirements:**
+
 - Format: JPG, PNG, WebP
 - Size: Recommended < 2MB for fast loading
 - Dimensions: Minimum 800x600px
@@ -254,10 +260,12 @@ Currently showing mock reviews. To show real Google reviews:
 
 1. In Netlify dashboard: **Site settings** → **Environment variables**
 2. Add two variables:
+
    ```
    VITE_GOOGLE_PLACES_API_KEY = your-api-key-here
    VITE_GOOGLE_PLACE_ID = your-place-id-here
    ```
+
 3. Click **"Save"**
 4. Trigger new deployment: **Deploys** → **"Trigger deploy"** → **"Deploy site"**
 
@@ -299,6 +307,7 @@ Works on iOS Safari and Android Chrome.
 ### Forms not showing in Netlify dashboard
 
 **Solution:**
+
 1. Make sure forms have `data-netlify="true"` attribute
 2. Redeploy site: **Deploys** → **"Trigger deploy"**
 3. Submit test form
@@ -307,6 +316,7 @@ Works on iOS Safari and Android Chrome.
 ### Can't login to /admin
 
 **Solution:**
+
 1. Verify GitHub OAuth is enabled: **Site settings** → **Access control** → **OAuth**
 2. Make sure you have write access to the GitHub repository
 3. Try logging out of GitHub and back in
@@ -318,6 +328,7 @@ Works on iOS Safari and Android Chrome.
 ### CMS changes not appearing on site
 
 **Solution:**
+
 1. Check **Deploys** tab - build should start automatically
 2. If no build triggered, click **"Trigger deploy"**
 3. Wait 2-3 minutes for rebuild
@@ -326,6 +337,7 @@ Works on iOS Safari and Android Chrome.
 ### Images not uploading
 
 **Solution:**
+
 1. Check file size (must be < 10MB)
 2. Use JPG or PNG format
 3. Try different image
@@ -355,18 +367,21 @@ Before sharing site with customers:
 ## 🎯 Next Steps
 
 ### Immediate (Today)
+
 1. ✅ Deploy to Netlify
 2. ✅ Enable GitHub OAuth for CMS
 3. ✅ Test CMS login at `/admin`
 4. ✅ Test form submission
 
 ### This Week
+
 1. Upload real gallery images
 2. Update business information
 3. Add real testimonials
 4. Test on mobile
 
 ### Optional
+
 1. Set up custom domain
 2. Configure Google Reviews API
 3. Add more services through CMS
@@ -376,6 +391,7 @@ Before sharing site with customers:
 ## 💡 Tips for Content Editing
 
 ### Writing Good Service Descriptions
+
 - Keep it under 200 words
 - Focus on customer benefits
 - Include what's included
@@ -383,6 +399,7 @@ Before sharing site with customers:
 - Add pricing if desired
 
 ### Choosing Good Gallery Images
+
 - High resolution (at least 1200px wide)
 - Good lighting
 - Show before/after when possible
@@ -390,6 +407,7 @@ Before sharing site with customers:
 - Professional quality
 
 ### Managing Testimonials
+
 - Ask permission to use reviews
 - Include customer first name only
 - Add date reviewed
@@ -401,19 +419,22 @@ Before sharing site with customers:
 ## 📞 Support
 
 ### Netlify Support
+
 - Docs: [https://docs.netlify.com](https://docs.netlify.com)
 - Community: [https://answers.netlify.com](https://answers.netlify.com)
 - Support: Free tier includes community support
 
 ### CMS Documentation
+
 - Guide: [https://www.netlifycms.org/docs/](https://www.netlifycms.org/docs/)
 - Widget Reference: For customizing fields
 
 ---
 
-## 🎉 You're All Set!
+## 🎉 You're All Set
 
 Your wedding dress cleaning website is now:
+
 - ✅ Live on the internet
 - ✅ Easy to update (no coding needed)
 - ✅ Accepting form submissions

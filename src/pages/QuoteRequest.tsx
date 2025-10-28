@@ -173,8 +173,8 @@ I have ${uploadedImages.length} image(s) to share.`;
       {/* Quote Form */}
       <section className='py-20 bg-white'>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <form 
-            onSubmit={handleSubmit} 
+          <form
+            onSubmit={handleSubmit}
             className='space-y-8'
             name='quote-request'
             method='POST'

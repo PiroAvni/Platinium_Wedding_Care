@@ -13,34 +13,40 @@
 ## 🔄 Quick Fixes Needed (15 minutes)
 
 ### 1. Remove Insecure Admin Panel
+
 - [ ] Delete `/src/pages/Admin.tsx` (fake admin - security risk)
 - [ ] Remove admin route from `App.tsx`
 - [ ] Netlify CMS will provide real admin at `/admin`
 
 ### 2. Deploy to Netlify (5 minutes - FREE)
+
 - [ ] Sign up at netlify.com
 - [ ] Import from GitHub
 - [ ] Deploy (automatic)
 
 ### 3. Enable Content Management (5 minutes - FREE)
+
 - [ ] Enable Netlify Identity
 - [ ] Enable Git Gateway
 - [ ] Invite yourself as admin
 - [ ] Access /admin to edit content
 
 ### 4. Configure Forms (5 minutes - FREE)
+
 - [ ] Option A: Enable Netlify Forms (add `netlify` attribute)
 - [ ] Option B: Sign up for Formspree (50 forms/month free)
 
 ## 🎯 Optional Enhancements (All Free)
 
 ### Google Reviews (Optional)
+
 - [ ] Create Google Cloud account (free)
 - [ ] Enable Places API (300 requests/day free)
 - [ ] Add API key to Netlify env vars
 - [ ] Or keep using mock data (current fallback)
 
 ### Analytics (Optional)
+
 - [ ] Add Google Analytics (free)
 - [ ] Track WhatsApp clicks
 - [ ] Monitor page views
@@ -81,12 +87,15 @@
 Choose your path:
 
 ### Path A: Fully Automated (Recommended)
+
 I can make all changes and provide deployment guide
 
 ### Path B: Manual Setup  
+
 Follow COST-EFFECTIVE-SETUP.md guide
 
 **Ready to proceed? Just say "yes" and I'll:**
+
 1. Remove the insecure admin panel
 2. Set up free contact forms
 3. Create deployment instructions

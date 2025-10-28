@@ -5,6 +5,7 @@ A modern, cost-effective static website for a wedding dress cleaning service wit
 ## ✨ Features
 
 ### ✅ Implemented & Ready
+
 - **WhatsApp Integration** - Instant messaging for quote requests
 - **Netlify CMS** - Edit content without coding (100% free)
 - **Contact Forms** - Netlify Forms (100 free submissions/month)
@@ -14,12 +15,14 @@ A modern, cost-effective static website for a wedding dress cleaning service wit
 - **Fast Performance** - React 19 + Vite for blazing fast loads
 
 ### ⚠️ Optional Setup Required
+
 - **Google Reviews** - Real reviews integration (needs API key)
 - **Custom Domain** - Use your own domain ($9-15/year optional)
 
 ## 🚀 Quick Start
 
 ### For Deployment (Non-Technical Users)
+
 1. **Read**: `NETLIFY-DEPLOYMENT-GUIDE.md` for step-by-step instructions
 2. **Deploy**: Follow guide to deploy to Netlify (10 minutes)
 3. **Setup CMS**: Enable Identity and Git Gateway (5 minutes)
@@ -28,7 +31,8 @@ A modern, cost-effective static website for a wedding dress cleaning service wit
 ### For Developers
 
 #### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 - Git
 
@@ -90,7 +94,7 @@ Wedding Dress Web/
 └── package.json
 ```
 
-## 💰 Cost Breakdown - $0/month!
+## 💰 Cost Breakdown - $0/month
 
 | Service | What It Provides | Free Tier | Cost |
 |---------|-----------------|-----------|------|
@@ -291,10 +295,10 @@ npm run build
 
 ## 📞 Support
 
-- **Netlify Docs**: https://docs.netlify.com
-- **Netlify CMS**: https://www.netlifycms.org/docs/
-- **React Docs**: https://react.dev
-- **Tailwind CSS**: https://tailwindcss.com/docs
+- **Netlify Docs**: <https://docs.netlify.com>
+- **Netlify CMS**: <https://www.netlifycms.org/docs/>
+- **React Docs**: <https://react.dev>
+- **Tailwind CSS**: <https://tailwindcss.com/docs>
 
 ## 📄 License
 

@@ -43,6 +43,7 @@
 6. Click **"Publish"**
 
 **Image Tips:**
+
 - Use high quality images (at least 1200px wide)
 - Keep file size under 2MB
 - Use JPG or PNG format
@@ -139,6 +140,7 @@ Works on iPhone Safari and Android Chrome.
 ## 🎨 Content Writing Tips
 
 ### Service Descriptions
+
 - **Keep it short:** 100-200 words
 - **Focus on benefits:** What does customer get?
 - **Be specific:** Mention timeframes, what's included
@@ -146,6 +148,7 @@ Works on iPhone Safari and Android Chrome.
 - **Include pricing:** If you want to display prices
 
 **Example:**
+
 ```
 Wedding Dress Cleaning
 
@@ -165,6 +168,7 @@ Service area: London M25
 ```
 
 ### Testimonials
+
 - **Get permission:** Always ask customer first
 - **Keep it real:** Authentic reviews convert better
 - **First name only:** "Sarah M." for privacy
@@ -172,6 +176,7 @@ Service area: London M25
 - **Recent dates:** Fresh reviews build trust
 
 ### Image Captions
+
 - **Describe what's shown:** "Vintage lace wedding dress after cleaning"
 - **Mention result:** "Restored to pristine condition"
 - **Keep it short:** One sentence is enough
@@ -183,6 +188,7 @@ Service area: London M25
 ### Can't login to /admin
 
 **Try this:**
+
 1. Make sure you have write access to the GitHub repository
 2. Check GitHub OAuth is enabled in Netlify dashboard
 3. Try logging out of GitHub and back in
@@ -194,6 +200,7 @@ Service area: London M25
 ### Changes not appearing on site
 
 **Try this:**
+
 1. Wait full 3 minutes after publishing
 2. Hard refresh: `Cmd+Shift+R` (Mac) or `Ctrl+Shift+R` (Windows)
 3. Check Netlify dashboard **"Deploys"** tab - should show build in progress
@@ -202,6 +209,7 @@ Service area: London M25
 ### Image won't upload
 
 **Try this:**
+
 1. Check file size (must be under 10MB)
 2. Use JPG or PNG format only
 3. Try a different image
@@ -231,6 +239,7 @@ Before publishing a change, double-check:
 ## 💡 Best Practices
 
 ### DO
+
 - ✅ Save drafts often (CMS auto-saves)
 - ✅ Preview changes before publishing
 - ✅ Use high-quality images
@@ -239,6 +248,7 @@ Before publishing a change, double-check:
 - ✅ Respond to form submissions quickly
 
 ### DON'T
+
 - ❌ Don't publish without proofreading
 - ❌ Don't use blurry or low-quality images
 - ❌ Don't write walls of text (use bullet points)
@@ -251,12 +261,14 @@ Before publishing a change, double-check:
 ## 🔐 Security Tips
 
 ### Keep Your Account Safe
+
 - Use strong, unique password
 - Don't share login credentials
 - Logout after editing (especially on shared computers)
 - Enable 2-factor authentication if offered
 
 ### If Account Compromised
+
 1. Change password immediately
 2. Contact Netlify support
 3. Review recent changes in CMS
@@ -267,15 +279,18 @@ Before publishing a change, double-check:
 ## 📞 Need Help?
 
 ### For Content Management Issues
-- **Netlify CMS Docs:** https://www.netlifycms.org/docs/
-- **Netlify Support:** https://answers.netlify.com
+
+- **Netlify CMS Docs:** <https://www.netlifycms.org/docs/>
+- **Netlify Support:** <https://answers.netlify.com>
 - **Your Developer:** [Insert contact here]
 
 ### For Form Submissions
+
 - Check Netlify dashboard **"Forms"** tab
 - Set up email notifications (see above)
 
 ### For Technical Issues
+
 - Check `NETLIFY-DEPLOYMENT-GUIDE.md` for detailed help
 - Contact Netlify support (free community support included)
 
@@ -284,6 +299,7 @@ Before publishing a change, double-check:
 ## 📊 Monitoring Your Site
 
 ### Things to Check Weekly
+
 - [ ] Form submissions - any new quotes?
 - [ ] Site still loading fast?
 - [ ] All images displaying correctly?
@@ -291,6 +307,7 @@ Before publishing a change, double-check:
 - [ ] Testimonials still current?
 
 ### Things to Update Monthly
+
 - [ ] Add fresh testimonials
 - [ ] Update gallery with recent work
 - [ ] Review services - anything to add/change?
@@ -315,9 +332,10 @@ Before publishing a change, double-check:
 
 ---
 
-## 🎉 You're All Set!
+## 🎉 You're All Set
 
 Your website is live and you can now:
+
 - ✅ Edit content anytime
 - ✅ Add/remove services
 - ✅ Manage gallery images
