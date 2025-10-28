@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
+import contactData from '../../public/content/settings/contact.json';
 
 const WhatsAppButton = () => {
-  const whatsappNumber = '+447123456789';
+  const whatsappNumber = contactData.whatsapp.replace(/[^0-9]/g, '');
   const message =
     'Hello! I would like to inquire about your wedding dress cleaning services.';
 
