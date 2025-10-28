@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import toast, { Toaster } from 'react-hot-toast';
 import {
   Upload,
   X,
@@ -90,11 +91,34 @@ const QuoteRequest = () => {
       (file) => file.type.startsWith('image/') && file.size <= 10 * 1024 * 1024 // 10MB limit
     );
 
-    setUploadedImages((prev) => [...prev, ...newFiles].slice(0, 10)); // Max 10 images
+    if (newFiles.length === 0) {
+      toast.error('Please select valid image files (max 10MB each)', {
+        position: 'top-center',
+      });
+      return;
+    }
+
+    const totalImages = uploadedImages.length + newFiles.length;
+    if (totalImages > 10) {
+      toast.error('Maximum 10 images allowed', {
+        position: 'top-center',
+      });
+      setUploadedImages((prev) => [...prev, ...newFiles].slice(0, 10));
+    } else {
+      toast.success(`${newFiles.length} image(s) added successfully`, {
+        duration: 2000,
+        position: 'top-center',
+      });
+      setUploadedImages((prev) => [...prev, ...newFiles]);
+    }
   };
 
   const removeImage = (index: number) => {
     setUploadedImages((prev) => prev.filter((_, i) => i !== index));
+    toast.success('Image removed', {
+      duration: 1500,
+      position: 'top-center',
+    });
   };
 
   const openFileSelector = () => {
@@ -117,8 +141,12 @@ const QuoteRequest = () => {
     console.log('Quote request submitted:', formData, uploadedImages);
 
     // Here you would typically send to your backend
-    alert(
-      "Quote request submitted successfully! We'll get back to you within 2 hours."
+    toast.success(
+      "Quote request submitted successfully! We'll get back to you within 2 hours.",
+      {
+        duration: 5000,
+        position: 'top-center',
+      }
     );
 
     // Reset form
@@ -137,8 +165,12 @@ const QuoteRequest = () => {
   const sendToWhatsApp = () => {
     // Basic validation
     if (!formData.customerName || !formData.email || !formData.serviceType) {
-      alert(
-        'Please fill in your name, email, and service type before sending to WhatsApp'
+      toast.error(
+        'Please fill in your name, email, and service type before sending to WhatsApp',
+        {
+          duration: 4000,
+          position: 'top-center',
+        }
       );
       return;
     }
@@ -157,12 +189,20 @@ I have ${uploadedImages.length} image(s) to share.`;
       ''
     )}?text=${encodeURIComponent(message)}`;
 
-    console.log('WhatsApp URL:', whatsappUrl); // Debug log
+    // Show success toast
+    toast.success('Opening WhatsApp...', {
+      duration: 2000,
+      position: 'top-center',
+    });
+
     window.open(whatsappUrl, '_blank');
   };
 
   return (
     <div className='min-h-screen pt-16'>
+      {/* Toast Notifications */}
+      <Toaster />
+
       {/* Hero Section */}
       <section className='bg-gradient-to-br from-gray-50 to-white py-16'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
