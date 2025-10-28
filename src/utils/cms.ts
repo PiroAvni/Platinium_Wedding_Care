@@ -56,6 +56,16 @@ export interface CMSCTA {
   secondaryButtonLink: string;
 }
 
+export interface CMSGalleryItem {
+  title: string;
+  description: string;
+  category: string;
+  beforeImage: string;
+  afterImage: string;
+  order: number;
+  body?: string; // The markdown content
+}
+
 // Parse frontmatter from markdown
 export const parseFrontmatter = (content: string): Record<string, unknown> => {
   const frontmatterRegex = /^---\n([\s\S]*?)\n---/;
@@ -158,3 +168,8 @@ export const loadPreservation = async (): Promise<CMSPreservation[]> => {
 export const loadCTASections = async (): Promise<CMSCTA[]> => {
   return loadMarkdownFiles<CMSCTA>('/public/content/cta');
 };
+
+// Load gallery items
+export const loadGalleryItems = async (): Promise<CMSGalleryItem[]> => {
+  return loadMarkdownFiles<CMSGalleryItem>('/public/content/gallery');
+};;
