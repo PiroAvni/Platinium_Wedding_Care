@@ -3,8 +3,6 @@ backend:
   name: github
   repo: PiroAvni/Platinium_Wedding_Care
   branch: main
-  # Optional: use open authoring for external contributors
-  # open_authoring: true
 
 # Local development backend (optional - for testing CMS locally)
 # Uncomment to test CMS on localhost:
@@ -14,58 +12,287 @@ media_folder: public/images
 public_folder: /images
 
 collections:
+  # ========================================
+  # SERVICES - Wedding cleaning services
+  # ========================================
   - name: "services"
     label: "Services"
     folder: "public/content/services"
     create: true
     slug: "{{slug}}"
+    identifier_field: "title"
     fields:
-      - {label: "Service Name", name: "title", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Category", name: "category", widget: "select", options: ["Bridal", "Formal Wear", "Accessories", "Preservation"]}
-      - {label: "Featured", name: "featured", widget: "boolean", default: false}
-      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Service Name", name: "title", widget: "string", hint: "e.g., Wedding Dress Cleaning"}
+      - {label: "Description", name: "description", widget: "text", hint: "Short description for cards"}
+      - {label: "Category", name: "category", widget: "select", options: ["Bridal", "Formal Wear", "Accessories", "Preservation", "Emergency", "Restoration"]}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false, hint: "Show on homepage?"}
+      - {label: "Duration", name: "duration", widget: "string", required: false, hint: "e.g., 3-5 days"}
+      - label: "Features"
+        name: "features"
+        widget: "list"
+        required: false
+        hint: "List of features/benefits for this service"
+        field: {label: "Feature", name: "feature", widget: "string"}
+      - {label: "Order", name: "order", widget: "number", default: 0, hint: "Display order (lower numbers first)"}
+      - {label: "Image", name: "image", widget: "image", required: false}
+      - {label: "Link", name: "link", widget: "string", required: false, hint: "e.g., /services/wedding-dress"}
       
+  # ========================================
+  # FEATURES - Why choose us benefits
+  # ========================================
+  - name: "features"
+    label: "Features"
+    folder: "public/content/features"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - {label: "Feature Title", name: "title", widget: "string", hint: "e.g., Free Collection & Delivery"}
+      - {label: "Description", name: "description", widget: "text"}
+      - label: "Icon"
+        name: "icon"
+        widget: "select"
+        options: ["Truck", "Shield", "Clock", "Star", "Award", "Users", "Heart", "CheckCircle", "Package", "Gift", "Sparkles"]
+        hint: "Choose icon from Lucide React"
+      - {label: "Category", name: "category", widget: "string", hint: "e.g., Service, Quality, Speed"}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Order", name: "order", widget: "number", default: 0}
+      
+  # ========================================
+  # PRESERVATION - Preservation packages
+  # ========================================
+  - name: "preservation"
+    label: "Preservation Packages"
+    folder: "public/content/preservation"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - {label: "Package Name", name: "title", widget: "string", hint: "e.g., Premium Heritage"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Category", name: "category", widget: "select", options: ["Essential", "Premium", "Luxury", "Express"]}
+      - {label: "Price", name: "price", widget: "string", required: false, hint: "e.g., £199 or Starting from £150"}
+      - label: "Features"
+        name: "features"
+        widget: "list"
+        hint: "List of features included in this package"
+        field: {label: "Feature", name: "feature", widget: "string"}
+      - {label: "Image", name: "image", widget: "image", required: false}
+      - {label: "Highlighted", name: "highlighted", widget: "boolean", default: false, hint: "Show as recommended?"}
+      - {label: "Order", name: "order", widget: "number", default: 0}
+      
+  # ========================================
+  # TESTIMONIALS - Customer reviews
+  # ========================================
   - name: "testimonials"
     label: "Testimonials"
     folder: "public/content/testimonials"
     create: true
     slug: "{{slug}}"
+    identifier_field: "name"
     fields:
       - {label: "Customer Name", name: "name", widget: "string"}
-      - {label: "Location", name: "location", widget: "string"}
+      - {label: "Location", name: "location", widget: "string", hint: "e.g., Mayfair, London"}
       - {label: "Review", name: "text", widget: "text"}
-      - {label: "Rating", name: "rating", widget: "number", min: 1, max: 5}
-      - {label: "Service Type", name: "serviceType", widget: "string"}
+      - {label: "Rating", name: "rating", widget: "number", min: 1, max: 5, default: 5}
+      - {label: "Service Type", name: "serviceType", widget: "string", hint: "e.g., Vintage Dress Restoration"}
+      - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", required: false}
+      - {label: "Verified", name: "verified", widget: "boolean", default: false}
       - {label: "Photo", name: "image", widget: "image", required: false}
       
+  # ========================================
+  # GALLERY - Before/After photos
+  # ========================================
   - name: "gallery"
     label: "Gallery"
     folder: "public/content/gallery"
     create: true
     slug: "{{slug}}"
+    identifier_field: "title"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "Category", name: "category", widget: "select", options: ["wedding-dress", "groom-suit", "shoes", "accessories"]}
+      - {label: "Category", name: "category", widget: "select", options: ["wedding-dress", "groom-suit", "shoes", "accessories", "before-after"]}
       - {label: "Before Image", name: "beforeImage", widget: "image"}
       - {label: "After Image", name: "afterImage", widget: "image"}
+      - {label: "Order", name: "order", widget: "number", default: 0}
       
+  # ========================================
+  # CTA SECTIONS - Call-to-action blocks
+  # ========================================
+  - name: "cta_sections"
+    label: "CTA Sections"
+    folder: "public/content/cta"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Subtitle", name: "subtitle", widget: "text"}
+      - {label: "Primary Button Text", name: "primaryButtonText", widget: "string", default: "Get Quote"}
+      - {label: "Primary Button Link", name: "primaryButtonLink", widget: "string", default: "/quote"}
+      - {label: "Secondary Button Text", name: "secondaryButtonText", widget: "string", default: "Contact Us"}
+      - {label: "Secondary Button Link", name: "secondaryButtonLink", widget: "string", default: "/contact"}
+      
+  # ========================================
+  # SITE SETTINGS - File-based collections
+  # ========================================
   - name: "settings"
     label: "Site Settings"
     files:
+      # Contact Information
       - label: "Contact Information"
         name: "contact"
         file: "public/content/settings/contact.json"
         fields:
-          - {label: "Phone Number", name: "phone", widget: "string"}
-          - {label: "WhatsApp Number", name: "whatsapp", widget: "string"}
+          - {label: "Phone Number", name: "phone", widget: "string", hint: "+44 7123 456 789"}
+          - {label: "WhatsApp Number", name: "whatsapp", widget: "string", hint: "Same as phone or different"}
           - {label: "Email", name: "email", widget: "string"}
-          - {label: "Service Area", name: "serviceArea", widget: "string"}
-      - label: "Homepage"
+          - {label: "Service Area", name: "serviceArea", widget: "string", default: "London M25 Area"}
+          - label: "Business Hours"
+            name: "businessHours"
+            widget: "list"
+            fields:
+              - {label: "Day", name: "day", widget: "string"}
+              - {label: "Hours", name: "hours", widget: "string"}
+      
+      # Company Information
+      - label: "Company Information"
+        name: "company"
+        file: "public/content/settings/company.json"
+        fields:
+          - {label: "Company Name", name: "name", widget: "string", default: "Platinum Wedding Care"}
+          - {label: "Tagline", name: "tagline", widget: "string", default: "Professional Wedding Dress Cleaning"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Logo Text Primary", name: "logoPrimary", widget: "string", default: "Platinum"}
+          - {label: "Logo Text Secondary", name: "logoSecondary", widget: "string", default: "Wedding Care"}
+      
+      # Navigation
+      - label: "Navigation Menus"
+        name: "navigation"
+        file: "public/content/settings/navigation.json"
+        fields:
+          - label: "Header Menu"
+            name: "headerMenu"
+            widget: "list"
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Path", name: "path", widget: "string"}
+          - label: "Footer Quick Links"
+            name: "footerQuickLinks"
+            widget: "list"
+            fields:
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Path", name: "path", widget: "string"}
+          - label: "Footer Services"
+            name: "footerServices"
+            widget: "list"
+            field: {label: "Service", name: "service", widget: "string"}
+      
+      # Homepage Settings
+      - label: "Homepage Content"
         name: "homepage"
         file: "public/content/settings/homepage.json"
         fields:
-          - {label: "Hero Title", name: "heroTitle", widget: "string"}
-          - {label: "Hero Subtitle", name: "heroSubtitle", widget: "text"}
-          - {label: "Hero Background Image", name: "heroImage", widget: "image"}
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Title Line 1", name: "title1", widget: "string", default: "Platinum Care for Your"}
+              - {label: "Title Line 2", name: "title2", widget: "string", default: "Wedding Day"}
+              - {label: "Subtitle", name: "subtitle", widget: "text"}
+              - {label: "Primary Button Text", name: "primaryButton", widget: "string", default: "Get Instant Quote"}
+              - {label: "Secondary Button Text", name: "secondaryButton", widget: "string", default: "Call Now"}
+              - {label: "Background Image", name: "bgImage", widget: "image", required: false}
+              - {label: "Main Image", name: "mainImage", widget: "image", required: false}
+          - label: "Features Section"
+            name: "features"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string", default: "Why Choose Platinum Wedding Care"}
+              - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - label: "Final CTA Section"
+            name: "finalCTA"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Subtitle", name: "subtitle", widget: "text"}
+              - {label: "Primary Button", name: "primaryButton", widget: "string"}
+              - {label: "Secondary Button", name: "secondaryButton", widget: "string"}
+      
+      # Services Page
+      - label: "Services Page Content"
+        name: "services_page"
+        file: "public/content/settings/services_page.json"
+        fields:
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string", default: "Our Services"}
+              - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - label: "Additional Services"
+            name: "additionalServices"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - label: "Icon"
+                name: "icon"
+                widget: "select"
+                options: ["Clock", "Shield", "Truck", "Star"]
+      
+      # Gallery Page
+      - label: "Gallery Page Content"
+        name: "gallery_page"
+        file: "public/content/settings/gallery_page.json"
+        fields:
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string", default: "Our Work Gallery"}
+              - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - label: "Categories"
+            name: "categories"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "string"}
+              - {label: "Name", name: "name", widget: "string"}
+      
+      # Contact Page
+      - label: "Contact Page Content"
+        name: "contact_page"
+        file: "public/content/settings/contact_page.json"
+        fields:
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string", default: "Contact Us"}
+              - {label: "Subtitle", name: "subtitle", widget: "text"}
+      
+      # Quote Page
+      - label: "Quote Request Page"
+        name: "quote_page"
+        file: "public/content/settings/quote_page.json"
+        fields:
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string", default: "Get Your Quote"}
+              - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - label: "Service Types"
+            name: "serviceTypes"
+            widget: "list"
+            fields:
+              - {label: "Value", name: "value", widget: "string"}
+              - {label: "Label", name: "label", widget: "string"}
+          - label: "Urgency Options"
+            name: "urgencyOptions"
+            widget: "list"
+            fields:
+              - {label: "Value", name: "value", widget: "string"}
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Price Info", name: "price", widget: "string"}

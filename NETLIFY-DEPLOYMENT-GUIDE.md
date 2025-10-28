@@ -90,13 +90,17 @@ Your forms are already configured! But you need to verify the setup:
 
 ---
 
-## 🎨 Step 3: Enable Netlify CMS (GitHub OAuth)
+## 🎨 Step 3: Enable Netlify CMS Authentication
 
 This is the **most important step** - it allows you to edit content without coding!
 
-**Note:** We're using GitHub OAuth instead of the deprecated Netlify Identity. This is free, more secure, and better supported.
+**Note:** We're using OAuth instead of the deprecated Netlify Identity. Choose either GitHub or Google authentication below.
 
-### 3.1 Enable Netlify's GitHub OAuth
+### 3.1 Enable OAuth Authentication (Choose One)
+
+You have two options for authentication. Both are free and work the same way:
+
+#### Option A: GitHub OAuth (Recommended if you have GitHub account)
 
 1. Go to **Site settings** → **Access control** → **OAuth**
 2. Scroll to **Authentication providers**
@@ -104,21 +108,119 @@ This is the **most important step** - it allows you to edit content without codi
 4. Select **"GitHub"**
 5. Click **"Install"**
 
-That's it! Netlify automatically handles GitHub authentication.
+**Who can access:** Anyone with write access to your GitHub repository
 
-### 3.2 Access Your CMS
+**To add editors:** Go to GitHub repo → Settings → Collaborators → Add people
+
+#### Option B: Google OAuth (Recommended if you prefer Google login)
+
+1. Go to **Site settings** → **Access control** → **OAuth**
+2. Scroll to **Authentication providers**
+3. Click **"Install provider"**
+4. Select **"Google"**
+5. Follow the setup wizard:
+   - **Google Client ID**: See instructions below
+   - **Google Client Secret**: See instructions below
+6. Click **"Install"**
+
+**Setting up Google OAuth:**
+
+**Step 1: Create Google OAuth App**
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project (or select existing)
+3. Go to **APIs & Services** → **Credentials**
+4. Click **"Create Credentials"** → **"OAuth client ID"**
+5. If prompted, configure OAuth consent screen first:
+   - User Type: **External**
+   - App name: `Platinium Wedding Care CMS`
+   - User support email: Your email
+   - Developer contact: Your email
+   - Click **"Save and Continue"**
+   - Skip scopes (click **"Save and Continue"**)
+   - Add yourself as test user
+   - Click **"Save and Continue"**
+
+**Step 2: Configure OAuth Client**
+
+1. Application type: **Web application**
+2. Name: `Netlify CMS`
+3. Authorized JavaScript origins:
+   - `https://your-site-name.netlify.app`
+4. Authorized redirect URIs:
+   - `https://api.netlify.com/auth/done`
+5. Click **"Create"**
+6. Copy the **Client ID** and **Client Secret**
+
+**Step 3: Add to Netlify**
+
+1. Go back to Netlify: **Site settings** → **Access control** → **OAuth**
+2. Click **"Install provider"** → **"Google"**
+3. Paste **Client ID** and **Client Secret**
+4. Click **"Install"**
+
+**Who can access:** Anyone with a Google account that you authorize
+
+**To add editors:** They just need a Google account, no special permissions needed
+
+---
+
+### Which OAuth Should You Choose?
+
+| Feature | GitHub OAuth | Google OAuth |
+|---------|--------------|--------------|
+| **Setup Complexity** | ⭐ Very Easy (1 click) | ⭐⭐ Easy (5 minutes) |
+| **Who Can Access** | GitHub repo collaborators | Anyone with Google account |
+| **Access Control** | Automatic via GitHub | Manual authorization |
+| **Best For** | Developers, technical teams | Non-technical users |
+| **Additional Setup** | None | Google Cloud project needed |
+
+**Recommendation:**
+
+- Use **GitHub OAuth** if you and your editors have GitHub accounts
+- Use **Google OAuth** if your editors don't use GitHub or prefer Google login
+
+---
+
+### 3.2 Update CMS Config (If Using Google)
+
+If you chose Google OAuth, update the CMS configuration:
+
+1. Open `public/admin/config.yml` in your code editor
+2. Change the backend section:
+
+```yaml
+# For Google OAuth
+backend:
+  name: git-gateway
+  branch: main
+```
+
+3. Save the file
+4. Commit and push to GitHub:
+
+```bash
+git add public/admin/config.yml
+git commit -m "Switch to Google OAuth"
+git push origin main
+```
+
+**Note:** GitHub OAuth uses `name: github` (already configured). Google OAuth uses `name: git-gateway`.
+
+---
+
+### 3.3 Access Your CMS
 
 1. Visit: `https://your-site-name.netlify.app/admin`
-2. Click **"Login with GitHub"**
+2. Click **"Login with GitHub"** or **"Login with Google"** (depending on your choice)
 3. Authorize the Netlify CMS application
 4. **You're in!** 🎉
 
-**Who can access:**
+---
 
-- Anyone with **write access** to your GitHub repository
-- To add editors: Add them as collaborators on GitHub
+### 3.4 Add Other Editors (Optional)
 
-### 3.3 Add Other Editors (Optional)
+**For GitHub OAuth:**
 
 To allow others to edit content:
 
@@ -128,6 +230,23 @@ To allow others to edit content:
 4. Enter their GitHub username
 5. They'll receive invitation email
 6. Once accepted, they can access `/admin` on your site
+
+**For Google OAuth:**
+
+Anyone with a Google account can potentially access the CMS, but you control who can actually edit by:
+
+1. Adding them to the OAuth consent screen test users (during development)
+2. OR publishing the OAuth app (for production use)
+
+**To manage Google OAuth users:**
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Select your project
+3. **APIs & Services** → **OAuth consent screen**
+4. Add test users (email addresses)
+5. They can now login with their Google accounts
+
+**Note:** With Google OAuth, access control is managed through Google Cloud Console, not GitHub.
 
 ---
 

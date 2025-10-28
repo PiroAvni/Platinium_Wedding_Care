@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TestimonialCard, Carousel, type Testimonial } from '../ui/index.ts';
 import { getReviews } from '../../utils/googleReviews.ts';
-import {
-  allManualTestimonials,
-  testimonialConfigs,
-} from '../../data/testimonials.tsx';
+import { loadTestimonials } from '../../utils/cms.ts';
+import homepageData from '../../../public/content/settings/homepage.json';
 
 interface TestimonialsProps {
   testimonials?: Testimonial[];
@@ -30,8 +28,8 @@ interface TestimonialsProps {
 
 const TestimonialsSection = ({
   testimonials,
-  title = testimonialConfigs.home.title,
-  subtitle = testimonialConfigs.home.subtitle,
+  title,
+  subtitle,
   sectionClassName = 'py-12 sm:py-16 md:py-20 bg-gray-50 w-full',
   variant = 'default',
   showSource = true,
@@ -44,40 +42,48 @@ const TestimonialsSection = ({
   autoPlayInterval = 6000,
   maxReviews = 10,
 }: TestimonialsProps) => {
-  const [allTestimonials, setAllTestimonials] = useState<Testimonial[]>(
-    testimonials || allManualTestimonials
-  );
-  const [loading, setLoading] = useState(useGoogleReviews && !testimonials);
+  const [allTestimonials, setAllTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch Google Reviews on component mount
+  const { testimonials: testimonialsConfig } = homepageData;
+  const displayTitle = title || testimonialsConfig.title;
+  const displaySubtitle = subtitle || testimonialsConfig.subtitle;
+
+  // Fetch testimonials from CMS and optionally Google Reviews
   useEffect(() => {
-    if (useGoogleReviews && !testimonials) {
-      const fetchReviews = async () => {
-        try {
-          setLoading(true);
-          setError(null);
+    const fetchTestimonials = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Load CMS testimonials
+        const cmsTestimonials = testimonials || (await loadTestimonials());
+
+        if (useGoogleReviews) {
+          // Fetch Google Reviews and merge with CMS
           const googleReviews = await getReviews();
 
-          // Combine Google reviews with manual testimonials
-          const combinedReviews = [
-            ...googleReviews,
-            ...allManualTestimonials,
-          ].slice(0, maxReviews);
+          // Combine Google reviews with CMS testimonials
+          const combinedReviews = [...googleReviews, ...cmsTestimonials].slice(
+            0,
+            maxReviews
+          );
 
           setAllTestimonials(combinedReviews);
-        } catch (err) {
-          console.error('Failed to fetch reviews:', err);
-          setError('Failed to load latest reviews');
-          // Fallback to manual testimonials
-          setAllTestimonials(allManualTestimonials.slice(0, maxReviews));
-        } finally {
-          setLoading(false);
+        } else {
+          setAllTestimonials(cmsTestimonials.slice(0, maxReviews));
         }
-      };
+      } catch (err) {
+        console.error('Failed to fetch testimonials:', err);
+        setError('Failed to load testimonials');
+        setAllTestimonials([]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      fetchReviews();
-    }
+    fetchTestimonials();
   }, [useGoogleReviews, testimonials, maxReviews]);
 
   // Loading state
@@ -93,10 +99,10 @@ const TestimonialsSection = ({
             className='text-center mb-12 md:mb-16'
           >
             <h2 className='text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-3 md:mb-4'>
-              {title}
+              {displayTitle}
             </h2>
             <p className='text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4'>
-              {subtitle}
+              {displaySubtitle}
             </p>
           </motion.div>
 
@@ -131,10 +137,10 @@ const TestimonialsSection = ({
           className='text-center mb-12 md:mb-16'
         >
           <h2 className='text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-3 md:mb-4'>
-            {title}
+            {displayTitle}
           </h2>
           <p className='text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4'>
-            {subtitle}
+            {displaySubtitle}
           </p>
           {error && (
             <p className='text-sm text-orange-600 mt-2'>

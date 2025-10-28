@@ -1,0 +1,50 @@
+{
+    "headerMenu": [
+        {
+            "label": "Home",
+            "path": "/"
+        },
+        {
+            "label": "Services",
+            "path": "/services"
+        },
+        {
+            "label": "Gallery",
+            "path": "/gallery"
+        },
+        {
+            "label": "Contact",
+            "path": "/contact"
+        }
+    ],
+    "footerQuickLinks": [
+        {
+            "label": "Home",
+            "path": "/"
+        },
+        {
+            "label": "Our Services",
+            "path": "/services"
+        },
+        {
+            "label": "Gallery",
+            "path": "/gallery"
+        },
+        {
+            "label": "Contact Us",
+            "path": "/contact"
+        },
+        {
+            "label": "Get Quote",
+            "path": "/quote"
+        }
+    ],
+    "footerServices": [
+        "Wedding Dress Cleaning",
+        "Groom's Suit Care",
+        "Wedding Shoe Cleaning",
+        "Accessories Care",
+        "Restoration Services",
+        "Emergency Express Service"
+    ]
+}

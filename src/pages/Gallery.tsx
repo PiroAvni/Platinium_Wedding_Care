@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import galleryPageData from '../../public/content/settings/gallery_page.json';
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -114,12 +115,10 @@ const Gallery = () => {
             className='text-center'
           >
             <h1 className='text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6'>
-              Our Work Gallery
+              {galleryPageData.hero.title}
             </h1>
             <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
-              See the quality of our work and the care we put into every
-              garment. From delicate lace to formal suits, we handle each piece
-              with expertise.
+              {galleryPageData.hero.subtitle}
             </p>
           </motion.div>
         </div>

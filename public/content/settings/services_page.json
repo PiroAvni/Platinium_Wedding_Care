@@ -1,0 +1,28 @@
+{
+    "hero": {
+        "title": "Our Services",
+        "subtitle": "Comprehensive cleaning and care services for all your wedding garments. Professional, reliable, and trusted by couples across London."
+    },
+    "additionalServices": [
+        {
+            "title": "Express Service",
+            "description": "Same-day and next-day service available for urgent requests",
+            "icon": "Clock"
+        },
+        {
+            "title": "Insurance Coverage",
+            "description": "All garments insured up to £2000 during our care",
+            "icon": "Shield"
+        },
+        {
+            "title": "Collection & Delivery",
+            "description": "Free collection and delivery within M25 area",
+            "icon": "Truck"
+        },
+        {
+            "title": "Quality Guarantee",
+            "description": "100% satisfaction guarantee on all cleaning services",
+            "icon": "Star"
+        }
+    ]
+}

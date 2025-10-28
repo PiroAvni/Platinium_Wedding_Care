@@ -2,8 +2,12 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Upload } from 'lucide-react';
 import { Button } from '../ui/index.ts';
+import homepageData from '../../../public/content/settings/homepage.json';
+import contactData from '../../../public/content/settings/contact.json';
 
 const HeroSection = () => {
+  const { hero } = homepageData;
+
   return (
     <section className='relative bg-gradient-to-br from-gray-50 to-white py-12 sm:py-16 md:py-20 lg:py-32 overflow-hidden w-full'>
       {/* Background Image with Fade Effect */}
@@ -51,29 +55,27 @@ const HeroSection = () => {
             className='order-2 lg:order-1'
           >
             <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-gray-900 leading-tight'>
-              Platinum Care for Your
-              <span className='block text-gray-600'>Wedding Day</span>
+              {hero.title1}
+              <span className='block text-gray-600'>{hero.title2}</span>
             </h1>
             <p className='text-base sm:text-lg md:text-xl lg:text-xl text-gray-600 mt-4 md:mt-6 leading-relaxed max-w-2xl'>
-              Professional wedding dress cleaning and care services within the
-              M25. Specializing in high-end garments with free collection and
-              delivery.
+              {hero.subtitle}
             </p>
 
             <div className='flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 md:mt-8'>
               <Link to='/quote' className='flex-1 sm:flex-none'>
                 <Button variant='primary' size='lg' fullWidth>
-                  Get Instant Quote
+                  {hero.primaryButton}
                 </Button>
               </Link>
 
               <Button
                 variant='outline'
                 size='lg'
-                href='tel:+447123456789'
+                href={`tel:${contactData.phone.replace(/\s/g, '')}`}
                 className='flex-1 sm:flex-none'
               >
-                Call Now
+                {hero.secondaryButton}
               </Button>
             </div>
           </motion.div>

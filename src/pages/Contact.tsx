@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
+import contactPageData from '../../public/content/settings/contact_page.json';
+import contactData from '../../public/content/settings/contact.json';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -41,38 +43,34 @@ const Contact = () => {
     {
       icon: <Phone className='w-6 h-6' />,
       title: 'Phone',
-      details: '+44 7123 456 789',
+      details: contactData.phone,
       description: 'Call us for immediate assistance',
-      action: 'tel:+447123456789',
+      action: `tel:${contactData.phone.replace(/\s/g, '')}`,
     },
     {
       icon: <Mail className='w-6 h-6' />,
       title: 'Email',
-      details: 'info@platinumweddingcare.co.uk',
+      details: contactData.email,
       description: 'Send us your questions anytime',
-      action: 'mailto:info@platinumweddingcare.co.uk',
+      action: `mailto:${contactData.email}`,
     },
     {
       icon: <MessageCircle className='w-6 h-6' />,
       title: 'WhatsApp',
-      details: '+44 7123 456 789',
+      details: contactData.whatsapp,
       description: 'Quick response via WhatsApp',
-      action: 'https://wa.me/447123456789',
+      action: `https://wa.me/${contactData.whatsapp.replace(/[^0-9]/g, '')}`,
     },
     {
       icon: <MapPin className='w-6 h-6' />,
       title: 'Service Area',
-      details: 'London M25 Area',
+      details: contactData.serviceArea,
       description: 'Free collection & delivery',
       action: null,
     },
   ];
 
-  const businessHours = [
-    { day: 'Monday - Friday', hours: '8:00 AM - 6:00 PM' },
-    { day: 'Saturday', hours: '9:00 AM - 4:00 PM' },
-    { day: 'Sunday', hours: 'Closed' },
-  ];
+  const businessHours = contactData.businessHours;
 
   return (
     <div className='min-h-screen pt-16'>
@@ -86,11 +84,10 @@ const Contact = () => {
             className='text-center'
           >
             <h1 className='text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6'>
-              Contact Us
+              {contactPageData.hero.title}
             </h1>
             <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
-              Get in touch with our team of experts. We're here to help with all
-              your wedding garment care needs.
+              {contactPageData.hero.subtitle}
             </p>
           </motion.div>
         </div>

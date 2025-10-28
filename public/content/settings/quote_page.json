@@ -1,0 +1,57 @@
+{
+    "hero": {
+        "title": "Get Your Quote",
+        "subtitle": "Upload photos of your garments for an accurate quote. We'll respond within 2 hours with detailed pricing."
+    },
+    "serviceTypes": [
+        {
+            "value": "wedding-dress",
+            "label": "Wedding Dress Cleaning"
+        },
+        {
+            "value": "groom-suit",
+            "label": "Groom's Suit Care"
+        },
+        {
+            "value": "wedding-shoes",
+            "label": "Wedding Shoes"
+        },
+        {
+            "value": "accessories",
+            "label": "Wedding Accessories"
+        },
+        {
+            "value": "bridesmaids",
+            "label": "Bridesmaids Dresses"
+        },
+        {
+            "value": "restoration",
+            "label": "Restoration Services"
+        },
+        {
+            "value": "multiple",
+            "label": "Multiple Items"
+        },
+        {
+            "value": "other",
+            "label": "Other"
+        }
+    ],
+    "urgencyOptions": [
+        {
+            "value": "standard",
+            "label": "Standard (3-5 days)",
+            "price": "Standard pricing"
+        },
+        {
+            "value": "express",
+            "label": "Express (1-2 days)",
+            "price": "+50% surcharge"
+        },
+        {
+            "value": "same-day",
+            "label": "Same Day Service",
+            "price": "+100% surcharge"
+        }
+    ]
+}

@@ -2,17 +2,15 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X, Phone } from 'lucide-react';
+import contactInfo from '../../public/content/settings/contact.json';
+import companyInfo from '../../public/content/settings/company.json';
+import navigationData from '../../public/content/settings/navigation.json';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
-  const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'Contact', path: '/contact' },
-  ];
+  const navItems = navigationData.headerMenu;
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -26,10 +24,10 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               className='font-serif text-2xl font-bold text-gray-900'
             >
-              Platinum
+              {companyInfo.logoPrimary}
             </motion.div>
             <span className='text-sm font-light text-gray-600'>
-              Wedding Care
+              {companyInfo.logoSecondary}
             </span>
           </Link>
 
@@ -37,7 +35,7 @@ const Header = () => {
           <nav className='hidden md:flex space-x-8'>
             {navItems.map((item) => (
               <Link
-                key={item.name}
+                key={item.label}
                 to={item.path}
                 className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                   isActive(item.path)
@@ -45,7 +43,7 @@ const Header = () => {
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
-                {item.name}
+                {item.label}
               </Link>
             ))}
           </nav>
@@ -53,7 +51,7 @@ const Header = () => {
           {/* Action Buttons */}
           <div className='hidden md:flex items-center space-x-4'>
             <a
-              href='tel:+447123456789'
+              href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
               className='flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors'
             >
               <Phone size={16} />
@@ -93,7 +91,7 @@ const Header = () => {
             <div className='flex flex-col space-y-4'>
               {navItems.map((item) => (
                 <Link
-                  key={item.name}
+                  key={item.label}
                   to={item.path}
                   onClick={() => setIsMenuOpen(false)}
                   className={`px-3 py-2 text-base font-medium transition-colors ${
@@ -102,13 +100,13 @@ const Header = () => {
                       : 'text-gray-600'
                   }`}
                 >
-                  {item.name}
+                  {item.label}
                 </Link>
               ))}
 
               <div className='flex flex-col space-y-2 pt-4 border-t border-gray-100'>
                 <a
-                  href='tel:+447123456789'
+                  href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
                   className='flex items-center space-x-2 px-3 py-2 text-gray-600'
                 >
                   <Phone size={16} />

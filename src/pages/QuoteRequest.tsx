@@ -8,6 +8,8 @@ import {
   MessageCircle,
   Phone,
 } from 'lucide-react';
+import quotePageData from '../../public/content/settings/quote_page.json';
+import contactData from '../../public/content/settings/contact.json';
 
 const QuoteRequest = () => {
   const [formData, setFormData] = useState({
@@ -142,9 +144,10 @@ Description: ${formData.description}
 
 I have ${uploadedImages.length} image(s) to share.`;
 
-    const whatsappUrl = `https://wa.me/447123456789?text=${encodeURIComponent(
-      message
-    )}`;
+    const whatsappUrl = `https://wa.me/${contactData.whatsapp.replace(
+      /[^0-9]/g,
+      ''
+    )}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -160,11 +163,10 @@ I have ${uploadedImages.length} image(s) to share.`;
             className='text-center'
           >
             <h1 className='text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6'>
-              Get Your Quote
+              {quotePageData.hero.title}
             </h1>
             <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
-              Upload photos of your garments for an accurate quote. We'll
-              respond within 2 hours with detailed pricing.
+              {quotePageData.hero.subtitle}
             </p>
           </motion.div>
         </div>

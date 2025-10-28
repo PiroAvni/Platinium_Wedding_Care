@@ -1,106 +1,30 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Clock, Shield, Star, Truck, Check } from 'lucide-react';
+import { loadServices, type CMSService } from '../utils/cms.ts';
+import servicesPageData from '../../public/content/settings/services_page.json';
 
 const Services = () => {
-  const services = [
-    {
-      id: 'wedding-dress',
-      name: 'Wedding Dress Cleaning',
-      description:
-        'Professional cleaning and preservation of your precious wedding dress',
-      duration: '3-5 days',
-      features: [
-        'Stain removal (food, makeup, grass, etc.)',
-        'Delicate fabric care',
-        'Professional pressing',
-        'Optional preservation boxing',
-        'Free collection & delivery',
-        'Insurance coverage up to £2000',
-      ],
-      image: '/api/placeholder/600/400',
-    },
-    {
-      id: 'groom-suit',
-      name: "Groom's Suit Care",
-      description:
-        'Expert cleaning and pressing for morning suits, tuxedos, and formal wear',
-      duration: '2-3 days',
-      features: [
-        'Professional dry cleaning',
-        'Expert pressing',
-        'Minor alterations available',
-        'Waistcoat and accessories included',
-        'Same-day service available',
-        'Free collection & delivery',
-      ],
-      image: '/api/placeholder/600/400',
-    },
-    {
-      id: 'wedding-shoes',
-      name: 'Wedding Shoe Cleaning',
-      description:
-        'Specialized cleaning for satin, leather, and delicate shoe materials',
-      duration: '1-2 days',
-      features: [
-        'Satin and silk shoe cleaning',
-        'Leather restoration',
-        'Stain removal',
-        'Sole cleaning and protection',
-        'Express service available',
-        'Free collection & delivery',
-      ],
-      image: '/api/placeholder/600/400',
-    },
-    {
-      id: 'accessories',
-      name: 'Wedding Accessories',
-      description:
-        'Careful cleaning of veils, gloves, ties, and other wedding accessories',
-      duration: '1-2 days',
-      features: [
-        'Veil cleaning and pressing',
-        'Glove cleaning',
-        'Tie and cufflink care',
-        'Handbag cleaning',
-        'Jewelry cleaning service',
-        'Free collection & delivery',
-      ],
-      image: '/api/placeholder/600/400',
-    },
-    {
-      id: 'bridesmaids',
-      name: 'Bridesmaids Dresses',
-      description:
-        'Group cleaning services for bridesmaids dresses with special rates',
-      duration: '2-3 days',
-      features: [
-        'Group discounts available',
-        'Color-safe cleaning',
-        'Professional pressing',
-        'Multiple pickup locations',
-        'Coordinated delivery',
-        'Free collection & delivery',
-      ],
-      image: '/api/placeholder/600/400',
-    },
-    {
-      id: 'restoration',
-      name: 'Restoration Services',
-      description:
-        'Expert restoration for vintage and damaged wedding garments',
-      duration: '1-2 weeks',
-      features: [
-        'Vintage dress restoration',
-        'Tear and hole repair',
-        'Bead and sequin replacement',
-        'Lace repair',
-        'Color restoration',
-        'Consultation included',
-      ],
-      image: '/api/placeholder/600/400',
-    },
-  ];
+  const [services, setServices] = useState<CMSService[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadServices().then((data) => {
+      setServices(data);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className='min-h-screen pt-16'>
+        <div className='flex items-center justify-center py-20'>
+          <p className='text-gray-600'>Loading services...</p>
+        </div>
+      </div>
+    );
+  }
 
   const additionalServices = [
     {
@@ -138,12 +62,10 @@ const Services = () => {
             className='text-center'
           >
             <h1 className='text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6'>
-              Our Services
+              {servicesPageData.hero.title}
             </h1>
             <p className='text-xl text-gray-600 max-w-3xl mx-auto'>
-              Comprehensive cleaning and care services for all your wedding
-              garments. Professional, reliable, and trusted by couples across
-              London.
+              {servicesPageData.hero.subtitle}
             </p>
           </motion.div>
         </div>
@@ -155,7 +77,7 @@ const Services = () => {
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-12'>
             {services.map((service, index) => (
               <motion.div
-                key={service.id}
+                key={service.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
@@ -164,14 +86,14 @@ const Services = () => {
               >
                 <div className='h-64 bg-gray-200 relative'>
                   <div className='absolute inset-0 flex items-center justify-center text-gray-500'>
-                    {service.name} Image
+                    {service.title} Image
                   </div>
                 </div>
 
                 <div className='p-8'>
                   <div className='flex justify-between items-start mb-4'>
                     <h3 className='text-2xl font-semibold text-gray-900'>
-                      {service.name}
+                      {service.title}
                     </h3>
                     <div className='text-right'>
                       <div className='text-sm text-gray-500'>
@@ -183,7 +105,7 @@ const Services = () => {
                   <p className='text-gray-600 mb-6'>{service.description}</p>
 
                   <ul className='space-y-2 mb-6'>
-                    {service.features.map((feature, idx) => (
+                    {service.features?.map((feature: string, idx: number) => (
                       <li
                         key={idx}
                         className='flex items-center text-sm text-gray-700'

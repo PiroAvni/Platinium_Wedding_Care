@@ -1,0 +1,20 @@
+{
+    "phone": "+44 7123 456 789",
+    "whatsapp": "+447123456789",
+    "email": "info@platinumweddingcare.co.uk",
+    "serviceArea": "London M25 Area",
+    "businessHours": [
+        {
+            "day": "Monday - Friday",
+            "hours": "8:00 AM - 6:00 PM"
+        },
+        {
+            "day": "Saturday",
+            "hours": "9:00 AM - 4:00 PM"
+        },
+        {
+            "day": "Sunday",
+            "hours": "Closed"
+        }
+    ]
+}

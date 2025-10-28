@@ -1,0 +1,31 @@
+{
+    "hero": {
+        "title1": "Platinum Care for Your",
+        "title2": "Wedding Day",
+        "subtitle": "Professional wedding dress cleaning and care services within the M25. Specializing in high-end garments with free collection and delivery.",
+        "primaryButton": "Get Instant Quote",
+        "secondaryButton": "Call Now"
+    },
+    "features": {
+        "title": "Why Choose Platinum Wedding Care",
+        "subtitle": "We understand the sentimental value of your wedding garments and treat each piece with the utmost care and attention."
+    },
+    "services": {
+        "title": "Our Premium Services",
+        "subtitle": "Professional wedding garment care services tailored to your needs"
+    },
+    "testimonials": {
+        "title": "What Our Clients Say",
+        "subtitle": "Join hundreds of satisfied couples who trusted us with their precious wedding garments."
+    },
+    "preservation": {
+        "title": "Preservation Packages",
+        "subtitle": "Keep your dress as pristine as your wedding day memories. Choose from our curated preservation options."
+    },
+    "finalCTA": {
+        "title": "Ready to Care for Your Wedding Garments?",
+        "subtitle": "Get an instant quote by uploading photos of your garments or speak with our experts directly.",
+        "primaryButton": "Upload for Quote",
+        "secondaryButton": "WhatsApp Us"
+    }
+}

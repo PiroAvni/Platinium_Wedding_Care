@@ -1,0 +1,32 @@
+{
+    "hero": {
+        "title": "Our Work Gallery",
+        "subtitle": "See the quality of our work and the care we put into every garment. From delicate lace to formal suits, we handle each piece with expertise."
+    },
+    "categories": [
+        {
+            "id": "all",
+            "name": "All"
+        },
+        {
+            "id": "wedding-dress",
+            "name": "Wedding Dresses"
+        },
+        {
+            "id": "groom-suit",
+            "name": "Groom's Suits"
+        },
+        {
+            "id": "shoes",
+            "name": "Wedding Shoes"
+        },
+        {
+            "id": "accessories",
+            "name": "Accessories"
+        },
+        {
+            "id": "before-after",
+            "name": "Before & After"
+        }
+    ]
+}

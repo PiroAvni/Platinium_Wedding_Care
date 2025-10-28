@@ -1,10 +1,30 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Star, Truck } from 'lucide-react';
-import {
-  preservationFeatures,
-  type PreservationFeature,
-} from '../../data/preservation.tsx';
+import { loadPreservation } from '../../utils/cms.ts';
+import homepageData from '../../../public/content/settings/homepage.json';
 import { Link } from 'react-router-dom';
+
+// Map icon names to Lucide components
+const iconMap: Record<string, React.ReactNode> = {
+  Shield: <Shield className='w-8 h-8' />,
+  Star: <Star className='w-8 h-8' />,
+  Truck: <Truck className='w-8 h-8' />,
+};
+
+interface PreservationFeature {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  price?: string;
+  highlighted: boolean;
+  features: string[];
+  image?: string;
+  icon?: React.ReactNode;
+  featured?: boolean;
+  alt?: string;
+}
 
 interface PreservationBoxesProps {
   preservationFeatures?: PreservationFeature[];
@@ -17,14 +37,39 @@ interface PreservationBoxesProps {
 }
 
 const PreservationBoxesSection = ({
-  preservationFeatures: features = preservationFeatures,
-  title = 'Premium Preservation Solutions',
-  subtitle = 'Protect your precious memories with our professional preservation services, designed to keep your wedding dress pristine for generations.',
+  preservationFeatures,
+  title,
+  subtitle,
   sectionClassName = 'py-12 sm:py-16 md:py-20 bg-white w-full',
   showLearnMoreButton = true,
   columns = 3,
   showCategory = true,
 }: PreservationBoxesProps) => {
+  const [features, setFeatures] = useState<PreservationFeature[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const { preservation: preservationConfig } = homepageData;
+  const displayTitle = title || preservationConfig.title;
+  const displaySubtitle = subtitle || preservationConfig.subtitle;
+
+  useEffect(() => {
+    if (preservationFeatures) {
+      setFeatures(preservationFeatures);
+      setLoading(false);
+    } else {
+      loadPreservation().then((data) => {
+        const formatted = data.map((item) => ({
+          ...item,
+          id: item.title.toLowerCase().replace(/\s+/g, '-'),
+          featured: item.highlighted,
+          icon: iconMap[item.category] || iconMap.Star,
+        }));
+        setFeatures(formatted);
+        setLoading(false);
+      });
+    }
+  }, [preservationFeatures]);
+
   const getGridColumns = () => {
     const columnClasses = {
       2: 'grid-cols-1 sm:grid-cols-2',
@@ -33,6 +78,18 @@ const PreservationBoxesSection = ({
     };
     return columnClasses[columns];
   };
+
+  if (loading) {
+    return (
+      <section className={sectionClassName}>
+        <div className='w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12'>
+          <div className='text-center py-12'>
+            <p className='text-gray-600'>Loading preservation packages...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className={sectionClassName}>
@@ -45,10 +102,10 @@ const PreservationBoxesSection = ({
           className='text-center mb-12 md:mb-16'
         >
           <h2 className='text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-3 md:mb-4'>
-            {title}
+            {displayTitle}
           </h2>
           <p className='text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4'>
-            {subtitle}
+            {displaySubtitle}
           </p>
         </motion.div>
 

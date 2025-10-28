@@ -1,10 +1,20 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Star, Shield, Truck, Clock } from 'lucide-react';
 import { ServiceCard, type Service } from '../ui/index.ts';
 import { Link } from 'react-router-dom';
+import { loadServices } from '../../utils/cms.ts';
+import homepageData from '../../../public/content/settings/homepage.json';
+
+// Map icon names to Lucide components
+const iconMap: Record<string, React.ReactNode> = {
+  Star: <Star className='w-5 h-5 md:w-6 md:h-6' />,
+  Shield: <Shield className='w-5 h-5 md:w-6 md:h-6' />,
+  Truck: <Truck className='w-5 h-5 md:w-6 md:h-6' />,
+  Clock: <Clock className='w-5 h-5 md:w-6 md:h-6' />,
+};
 
 interface ServicesProps {
-  services?: Service[];
   title?: string;
   subtitle?: string;
   sectionClassName?: string;
@@ -14,63 +24,53 @@ interface ServicesProps {
   ctaText?: string;
   ctaLink?: string;
   variant?: 'default' | 'compact' | 'detailed';
+  featuredOnly?: boolean;
 }
 
-const defaultServices: Service[] = [
-  {
-    id: 'wedding-dress-cleaning',
-    title: 'Wedding Dress Cleaning',
-    description:
-      'Professional cleaning and preservation of your precious wedding dress using specialized techniques for delicate fabrics.',
-    icon: <Star className='w-5 h-5 md:w-6 md:h-6' />,
-    category: 'Bridal',
-    featured: true,
-    link: '/services/wedding-dress',
-  },
-  {
-    id: 'groom-suit-care',
-    title: "Groom's Suit Care",
-    description:
-      'Expert cleaning and pressing for morning suits, tuxedos, and formal wear with attention to detail.',
-    icon: <Shield className='w-5 h-5 md:w-6 md:h-6' />,
-    category: 'Formal Wear',
-    featured: false,
-    link: '/services/suits',
-  },
-  {
-    id: 'wedding-shoes',
-    title: 'Wedding Shoes',
-    description:
-      'Specialized cleaning for satin, leather, and delicate shoe materials with color restoration.',
-    icon: <Truck className='w-5 h-5 md:w-6 md:h-6' />,
-    category: 'Accessories',
-    featured: false,
-    link: '/services/shoes',
-  },
-  {
-    id: 'accessories',
-    title: 'Wedding Accessories',
-    description:
-      'Veils, gloves, handbags, and other wedding accessories carefully cleaned and preserved.',
-    icon: <Clock className='w-5 h-5 md:w-6 md:h-6' />,
-    category: 'Accessories',
-    featured: false,
-    link: '/services/accessories',
-  },
-];
-
 const ServicesSection = ({
-  services = defaultServices,
-  title = 'Our Services',
-  subtitle = 'Comprehensive cleaning and care for all your wedding day garments and accessories.',
-  sectionClassName = 'relative py-12 sm:py-16 md:py-20 bg-gray-50 w-full overflow-hidden',
+  title,
+  subtitle,
+  sectionClassName = 'py-12 sm:py-16 md:py-20 bg-gray-50 w-full',
   showViewAllButton = true,
   columns = 4,
-  showCategory = true,
-  ctaText = 'Learn More',
-  ctaLink = '/quote',
+  showCategory = false,
+  ctaText = 'View All Services',
+  ctaLink = '/services',
   variant = 'default',
+  featuredOnly = true,
 }: ServicesProps) => {
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const { services: servicesConfig } = homepageData;
+  const displayTitle = title || servicesConfig.title;
+  const displaySubtitle = subtitle || servicesConfig.subtitle;
+
+  useEffect(() => {
+    loadServices().then((data) => {
+      // Filter for featured services if needed and format with default icons
+      const filtered = featuredOnly ? data.filter((s) => s.featured) : data;
+      const formatted = filtered.map((service) => {
+        // Assign default icon based on category
+        let defaultIcon = iconMap.Star;
+        if (service.category === 'Bridal') defaultIcon = iconMap.Star;
+        else if (service.category === 'Formal Wear')
+          defaultIcon = iconMap.Shield;
+        else if (service.category === 'Accessories')
+          defaultIcon = iconMap.Truck;
+        else if (service.category === 'Emergency') defaultIcon = iconMap.Clock;
+
+        return {
+          ...service,
+          id: service.title.toLowerCase().replace(/\s+/g, '-'),
+          icon: defaultIcon,
+        };
+      }) as Service[];
+      setServices(formatted);
+      setLoading(false);
+    });
+  }, [featuredOnly]);
+
   const getGridColumns = () => {
     const columnClasses = {
       2: 'grid-cols-1 sm:grid-cols-2',
@@ -79,6 +79,19 @@ const ServicesSection = ({
     };
     return columnClasses[columns];
   };
+
+  if (loading) {
+    return (
+      <section className={sectionClassName}>
+        <div className='relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12'>
+          <div className='text-center py-12'>
+            <p className='text-gray-600'>Loading services...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={sectionClassName}>
       {/* Background Images with Fade Effect */}
@@ -106,10 +119,10 @@ const ServicesSection = ({
           className='text-center mb-12 md:mb-16'
         >
           <h2 className='text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-3 md:mb-4'>
-            {title}
+            {displayTitle}
           </h2>
           <p className='text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4'>
-            {subtitle}
+            {displaySubtitle}
           </p>
         </motion.div>
 
