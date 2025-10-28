@@ -508,7 +508,7 @@ I have ${uploadedImages.length} image(s) to share.`;
                 className='flex items-center justify-center space-x-2 text-gray-900 hover:text-gray-600 font-medium'
               >
                 <Phone className='w-5 h-5' />
-                <span>`Call: ${contactData.phone}`</span>
+                <span>Call: {contactData.phone}</span>
               </a>
               <a
                 href={`https://wa.me/${contactData.whatsapp.replace(
