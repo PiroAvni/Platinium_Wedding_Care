@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Platinium_Wedding_Care/',
+  base: '/', // Changed from '/Platinium_Wedding_Care/' for Netlify deployment
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

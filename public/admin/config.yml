@@ -1,0 +1,63 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: "services"
+    label: "Services"
+    folder: "public/content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Service Name", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Category", name: "category", widget: "select", options: ["Bridal", "Formal Wear", "Accessories", "Preservation"]}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Image", name: "image", widget: "image"}
+      
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "public/content/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Customer Name", name: "name", widget: "string"}
+      - {label: "Location", name: "location", widget: "string"}
+      - {label: "Review", name: "text", widget: "text"}
+      - {label: "Rating", name: "rating", widget: "number", min: 1, max: 5}
+      - {label: "Service Type", name: "serviceType", widget: "string"}
+      - {label: "Photo", name: "image", widget: "image", required: false}
+      
+  - name: "gallery"
+    label: "Gallery"
+    folder: "public/content/gallery"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Category", name: "category", widget: "select", options: ["wedding-dress", "groom-suit", "shoes", "accessories"]}
+      - {label: "Before Image", name: "beforeImage", widget: "image"}
+      - {label: "After Image", name: "afterImage", widget: "image"}
+      
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Contact Information"
+        name: "contact"
+        file: "public/content/settings/contact.json"
+        fields:
+          - {label: "Phone Number", name: "phone", widget: "string"}
+          - {label: "WhatsApp Number", name: "whatsapp", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Service Area", name: "serviceArea", widget: "string"}
+      - label: "Homepage"
+        name: "homepage"
+        file: "public/content/settings/homepage.json"
+        fields:
+          - {label: "Hero Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero Subtitle", name: "heroSubtitle", widget: "text"}
+          - {label: "Hero Background Image", name: "heroImage", widget: "image"}

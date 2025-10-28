@@ -173,7 +173,21 @@ I have ${uploadedImages.length} image(s) to share.`;
       {/* Quote Form */}
       <section className='py-20 bg-white'>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <form onSubmit={handleSubmit} className='space-y-8'>
+          <form 
+            onSubmit={handleSubmit} 
+            className='space-y-8'
+            name='quote-request'
+            method='POST'
+            data-netlify='true'
+            netlify-honeypot='bot-field'
+          >
+            {/* Hidden fields for Netlify Forms */}
+            <input type='hidden' name='form-name' value='quote-request' />
+            <p className='hidden'>
+              <label>
+                Don't fill this out if you're human: <input name='bot-field' />
+              </label>
+            </p>
             {/* Image Upload Section */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}

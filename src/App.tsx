@@ -7,7 +7,6 @@ import Services from './pages/Services.tsx';
 import Gallery from './pages/Gallery.tsx';
 import Contact from './pages/Contact.tsx';
 import QuoteRequest from './pages/QuoteRequest.tsx';
-import Admin from './pages/Admin.tsx';
 import WhatsAppButton from './components/WhatsAppButton.tsx';
 import './App.css';
 
@@ -29,7 +28,6 @@ function App() {
             <Route path='/gallery' element={<Gallery />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/quote' element={<QuoteRequest />} />
-            <Route path='/admin' element={<Admin />} />
           </Routes>
         </motion.main>
 
