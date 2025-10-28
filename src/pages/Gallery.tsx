@@ -13,6 +13,7 @@ const Gallery = () => {
     const fetchGalleryItems = async () => {
       try {
         const items = await loadGalleryItems();
+        console.log('Loaded gallery items from CMS:', items);
         setGalleryItems(items);
       } catch (error) {
         console.error('Error loading gallery items:', error);
@@ -26,10 +27,17 @@ const Gallery = () => {
 
   const categories = galleryPageData.categories;
 
+  // Calculate filtered items - will update whenever galleryItems or selectedCategory changes
   const filteredItems =
     selectedCategory === 'all'
       ? galleryItems
       : galleryItems.filter((item) => item.category === selectedCategory);
+
+  console.log('Filtering:', {
+    selectedCategory,
+    totalItems: galleryItems.length,
+    filteredCount: filteredItems.length,
+  });
 
   return (
     <div className='min-h-screen pt-16'>
@@ -122,15 +130,17 @@ const Gallery = () => {
                       </div>
                     </div>
 
-                    <div className='p-6'>
+                    <div className='p-6 bg-white'>
                       <h3 className='text-xl font-semibold text-gray-900 mb-2'>
-                        {item.title}
+                        {item.title || 'Untitled'}
                       </h3>
-                      <p className='text-gray-600 text-sm'>{item.description}</p>
+                      <p className='text-gray-600 text-sm'>
+                        {item.description || 'No description available'}
+                      </p>
 
                       <div className='mt-4 flex justify-between items-center'>
                         <span className='text-xs uppercase tracking-wide text-gray-500 font-medium'>
-                          {categories.find((cat) => cat.id === item.category)?.name}
+                          {categories.find((cat) => cat.id === item.category)?.name || item.category}
                         </span>
                         <button className='text-gray-900 hover:text-gray-600 text-sm font-medium'>
                           View Details →
