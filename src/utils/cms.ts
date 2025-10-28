@@ -99,11 +99,15 @@ export const parseFrontmatter = (content: string): Record<string, unknown> => {
         frontmatter[currentKey] = [];
       } else {
         inArray = false;
+        // Remove quotes from string values
+        const cleanValue = value.replace(/^["']|["']$/g, '');
+
         // Parse value types
-        if (value === 'true') frontmatter[currentKey] = true;
-        else if (value === 'false') frontmatter[currentKey] = false;
-        else if (!isNaN(Number(value))) frontmatter[currentKey] = Number(value);
-        else frontmatter[currentKey] = value;
+        if (cleanValue === 'true') frontmatter[currentKey] = true;
+        else if (cleanValue === 'false') frontmatter[currentKey] = false;
+        else if (!isNaN(Number(cleanValue)) && cleanValue !== '')
+          frontmatter[currentKey] = Number(cleanValue);
+        else frontmatter[currentKey] = cleanValue;
       }
     }
   });
@@ -172,4 +176,4 @@ export const loadCTASections = async (): Promise<CMSCTA[]> => {
 // Load gallery items
 export const loadGalleryItems = async (): Promise<CMSGalleryItem[]> => {
   return loadMarkdownFiles<CMSGalleryItem>('/public/content/gallery');
-};;
+};

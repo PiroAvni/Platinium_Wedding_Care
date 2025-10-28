@@ -14,6 +14,12 @@ const Gallery = () => {
       try {
         const items = await loadGalleryItems();
         console.log('Loaded gallery items from CMS:', items);
+        console.log('Category values:', items.map(item => ({
+          title: item.title,
+          category: item.category,
+          categoryType: typeof item.category,
+          categoryWithQuotes: JSON.stringify(item.category)
+        })));
         setGalleryItems(items);
       } catch (error) {
         console.error('Error loading gallery items:', error);
@@ -25,18 +31,43 @@ const Gallery = () => {
     fetchGalleryItems();
   }, []);
 
-  const categories = galleryPageData.categories;
+  // Get categories from CMS settings
+  const cmsCategories = galleryPageData.categories;
+  
+  // Auto-detect unique categories from gallery items
+  const detectedCategories = Array.from(
+    new Set(galleryItems.map(item => item.category))
+  ).map(cat => ({
+    id: cat,
+    name: cmsCategories.find(c => c.id === cat)?.name || 
+          cat.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+  }));
+
+  // Combine: Always show "All", then CMS categories that exist, then any detected categories not in CMS
+  const allCategory = { id: 'all', name: 'All' };
+  const categories = [
+    allCategory,
+    ...cmsCategories.filter(cat => cat.id !== 'all'), // CMS categories (except All)
+    ...detectedCategories.filter(det => 
+      !cmsCategories.some(cms => cms.id === det.id) // Add detected ones not in CMS
+    )
+  ];
 
   // Calculate filtered items - will update whenever galleryItems or selectedCategory changes
   const filteredItems =
     selectedCategory === 'all'
       ? galleryItems
-      : galleryItems.filter((item) => item.category === selectedCategory);
+      : galleryItems.filter((item) => {
+          const matches = item.category === selectedCategory;
+          console.log(`Comparing: "${item.category}" === "${selectedCategory}" = ${matches}`);
+          return matches;
+        });
 
   console.log('Filtering:', {
     selectedCategory,
     totalItems: galleryItems.length,
     filteredCount: filteredItems.length,
+    availableCategories: categories.map(c => c.id),
   });
 
   return (
@@ -64,21 +95,32 @@ const Gallery = () => {
       <section className='py-8 bg-white border-b border-gray-100'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex flex-wrap justify-center gap-4'>
-            {categories.map((category) => (
-              <motion.button
-                key={category.id}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-2 rounded-full font-medium transition-colors ${
-                  selectedCategory === category.id
-                    ? 'bg-gray-900 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {category.name}
-              </motion.button>
-            ))}
+            {categories.map((category) => {
+              const count =
+                category.id === 'all'
+                  ? galleryItems.length
+                  : galleryItems.filter((item) => item.category === category.id)
+                      .length;
+
+              return (
+                <motion.button
+                  key={category.id}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    console.log('Filter clicked:', category.id);
+                    setSelectedCategory(category.id);
+                  }}
+                  className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                    selectedCategory === category.id
+                      ? 'bg-gray-900 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {category.name} ({count})
+                </motion.button>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -123,26 +165,31 @@ const Gallery = () => {
                         />
                         <div className='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center'>
                           <div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center px-4'>
-                            <p className='text-lg font-semibold mb-2'>View Before & After</p>
-                            <p className='text-sm'>Click to see transformation</p>
+                            <p className='text-lg font-semibold mb-2'>
+                              View Before & After
+                            </p>
+                            <p className='text-sm'>
+                              Click to see transformation
+                            </p>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className='p-6 bg-white'>
+                    <div className='p-6 bg-white relative z-10'>
                       <h3 className='text-xl font-semibold text-gray-900 mb-2'>
                         {item.title || 'Untitled'}
                       </h3>
-                      <p className='text-gray-600 text-sm'>
+                      <p className='text-gray-600 text-sm mb-4'>
                         {item.description || 'No description available'}
                       </p>
 
                       <div className='mt-4 flex justify-between items-center'>
                         <span className='text-xs uppercase tracking-wide text-gray-500 font-medium'>
-                          {categories.find((cat) => cat.id === item.category)?.name || item.category}
+                          {categories.find((cat) => cat.id === item.category)
+                            ?.name || item.category}
                         </span>
-                        <button className='text-gray-900 hover:text-gray-600 text-sm font-medium'>
+                        <button className='text-gray-900 hover:text-gray-700 text-sm font-semibold underline'>
                           View Details →
                         </button>
                       </div>
