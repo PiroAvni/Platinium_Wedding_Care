@@ -4,7 +4,9 @@
 
 **URL:** `https://your-site-name.netlify.app/admin`
 
-**Login:** Use your Netlify Identity email and password
+**Login:** Click "Login with GitHub" and authorize the app
+
+**Who can access:** Anyone with write access to the GitHub repository
 
 ---
 
@@ -12,7 +14,7 @@
 
 ### How to Edit a Service
 
-1. Login to `/admin`
+1. Login to `/admin` with GitHub
 2. Click **"Services"** in left sidebar
 3. Click on service you want to edit
 4. Make your changes
@@ -181,10 +183,13 @@ Service area: London M25
 ### Can't login to /admin
 
 **Try this:**
-1. Check you're using correct email
-2. Click **"Forgot password"** to reset
-3. Check email spam folder for reset link
-4. Make sure cookies are enabled in browser
+1. Make sure you have write access to the GitHub repository
+2. Check GitHub OAuth is enabled in Netlify dashboard
+3. Try logging out of GitHub and back in
+4. Clear browser cache and cookies
+5. Check browser console (F12) for errors
+
+**Note:** Only GitHub users with write access to the repository can login.
 
 ### Changes not appearing on site
 

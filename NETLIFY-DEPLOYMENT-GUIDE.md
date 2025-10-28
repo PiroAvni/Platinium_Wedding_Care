@@ -87,41 +87,43 @@ Your forms are already configured! But you need to verify the setup:
 
 ---
 
-## 🎨 Step 3: Enable Netlify CMS
+## 🎨 Step 3: Enable Netlify CMS (GitHub OAuth)
 
 This is the **most important step** - it allows you to edit content without coding!
 
-### 3.1 Enable Identity Service
+**Note:** We're using GitHub OAuth instead of the deprecated Netlify Identity. This is free, more secure, and better supported.
 
-1. Go to **Site settings** → **Identity**
-2. Click **"Enable Identity"**
-3. Under **Registration preferences**, select:
-   - ✅ **Invite only** (recommended for security)
-4. Under **External providers** (optional):
-   - You can enable Google/GitHub login if desired
+### 3.1 Enable Netlify's GitHub OAuth
 
-### 3.2 Enable Git Gateway
+1. Go to **Site settings** → **Access control** → **OAuth**
+2. Scroll to **Authentication providers**
+3. Click **"Install provider"**
+4. Select **"GitHub"**
+5. Click **"Install"**
 
-1. Still in **Identity** settings
-2. Scroll to **Services** section
-3. Click **"Enable Git Gateway"**
-4. This allows CMS to save changes directly to GitHub
+That's it! Netlify automatically handles GitHub authentication.
 
-### 3.3 Invite Yourself as Admin
-
-1. Go to **Identity** tab (top navigation)
-2. Click **"Invite users"**
-3. Enter your email address
-4. Click **"Send"**
-5. Check your email for invitation
-6. Click link in email to set your password
-
-### 3.4 Access Your CMS
+### 3.2 Access Your CMS
 
 1. Visit: `https://your-site-name.netlify.app/admin`
-2. Click **"Login with Netlify Identity"**
-3. Enter your email and password
+2. Click **"Login with GitHub"**
+3. Authorize the Netlify CMS application
 4. **You're in!** 🎉
+
+**Who can access:**
+- Anyone with **write access** to your GitHub repository
+- To add editors: Add them as collaborators on GitHub
+
+### 3.3 Add Other Editors (Optional)
+
+To allow others to edit content:
+
+1. Go to your GitHub repository
+2. Click **"Settings"** → **"Collaborators"**
+3. Click **"Add people"**
+4. Enter their GitHub username
+5. They'll receive invitation email
+6. Once accepted, they can access `/admin` on your site
 
 ---
 
@@ -305,10 +307,13 @@ Works on iOS Safari and Android Chrome.
 ### Can't login to /admin
 
 **Solution:**
-1. Verify Identity is enabled: **Site settings** → **Identity**
-2. Make sure you accepted email invitation
-3. Try **"Forgot password"** to reset
-4. Check browser isn't blocking third-party cookies
+1. Verify GitHub OAuth is enabled: **Site settings** → **Access control** → **OAuth**
+2. Make sure you have write access to the GitHub repository
+3. Try logging out of GitHub and back in
+4. Clear browser cache and try again
+5. Check browser console (F12) for any errors
+
+**Note:** Only GitHub users with write access to your repository can login to CMS.
 
 ### CMS changes not appearing on site
 
@@ -334,6 +339,8 @@ Before sharing site with customers:
 
 - [ ] Test all forms (Contact, Quote Request)
 - [ ] Set up email notifications for forms
+- [ ] Enable GitHub OAuth for CMS access
+- [ ] Test CMS login at `/admin` with your GitHub account
 - [ ] Upload real gallery images (replace placeholders)
 - [ ] Update business settings (phone, email, hours)
 - [ ] Test WhatsApp button on mobile
@@ -349,8 +356,8 @@ Before sharing site with customers:
 
 ### Immediate (Today)
 1. ✅ Deploy to Netlify
-2. ✅ Enable Identity + Git Gateway
-3. ✅ Invite yourself to CMS
+2. ✅ Enable GitHub OAuth for CMS
+3. ✅ Test CMS login at `/admin`
 4. ✅ Test form submission
 
 ### This Week

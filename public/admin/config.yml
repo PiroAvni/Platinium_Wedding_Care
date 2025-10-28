@@ -1,6 +1,14 @@
+# GitHub backend - no deprecated Netlify Identity needed!
 backend:
-  name: git-gateway
+  name: github
+  repo: PiroAvni/Platinium_Wedding_Care
   branch: main
+  # Optional: use open authoring for external contributors
+  # open_authoring: true
+
+# Local development backend (optional - for testing CMS locally)
+# Uncomment to test CMS on localhost:
+# local_backend: true
 
 media_folder: public/images
 public_folder: /images
