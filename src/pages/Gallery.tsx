@@ -14,12 +14,15 @@ const Gallery = () => {
       try {
         const items = await loadGalleryItems();
         console.log('Loaded gallery items from CMS:', items);
-        console.log('Category values:', items.map(item => ({
-          title: item.title,
-          category: item.category,
-          categoryType: typeof item.category,
-          categoryWithQuotes: JSON.stringify(item.category)
-        })));
+        console.log(
+          'Category values:',
+          items.map((item) => ({
+            title: item.title,
+            category: item.category,
+            categoryType: typeof item.category,
+            categoryWithQuotes: JSON.stringify(item.category),
+          }))
+        );
         setGalleryItems(items);
       } catch (error) {
         console.error('Error loading gallery items:', error);
@@ -33,24 +36,28 @@ const Gallery = () => {
 
   // Get categories from CMS settings
   const cmsCategories = galleryPageData.categories;
-  
+
   // Auto-detect unique categories from gallery items
   const detectedCategories = Array.from(
-    new Set(galleryItems.map(item => item.category))
-  ).map(cat => ({
+    new Set(galleryItems.map((item) => item.category))
+  ).map((cat) => ({
     id: cat,
-    name: cmsCategories.find(c => c.id === cat)?.name || 
-          cat.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+    name:
+      cmsCategories.find((c) => c.id === cat)?.name ||
+      cat
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' '),
   }));
 
   // Combine: Always show "All", then CMS categories that exist, then any detected categories not in CMS
   const allCategory = { id: 'all', name: 'All' };
   const categories = [
     allCategory,
-    ...cmsCategories.filter(cat => cat.id !== 'all'), // CMS categories (except All)
-    ...detectedCategories.filter(det => 
-      !cmsCategories.some(cms => cms.id === det.id) // Add detected ones not in CMS
-    )
+    ...cmsCategories.filter((cat) => cat.id !== 'all'), // CMS categories (except All)
+    ...detectedCategories.filter(
+      (det) => !cmsCategories.some((cms) => cms.id === det.id) // Add detected ones not in CMS
+    ),
   ];
 
   // Calculate filtered items - will update whenever galleryItems or selectedCategory changes
@@ -59,7 +66,9 @@ const Gallery = () => {
       ? galleryItems
       : galleryItems.filter((item) => {
           const matches = item.category === selectedCategory;
-          console.log(`Comparing: "${item.category}" === "${selectedCategory}" = ${matches}`);
+          console.log(
+            `Comparing: "${item.category}" === "${selectedCategory}" = ${matches}`
+          );
           return matches;
         });
 
@@ -67,7 +76,7 @@ const Gallery = () => {
     selectedCategory,
     totalItems: galleryItems.length,
     filteredCount: filteredItems.length,
-    availableCategories: categories.map(c => c.id),
+    availableCategories: categories.map((c) => c.id),
   });
 
   return (
