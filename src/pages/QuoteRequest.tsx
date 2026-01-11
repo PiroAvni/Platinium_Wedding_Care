@@ -138,9 +138,6 @@ const QuoteRequest = () => {
       submitData.append(`image_${index}`, file);
     });
 
-    console.log('Quote request submitted:', formData, uploadedImages);
-
-    // Here you would typically send to your backend
     toast.success(
       "Quote request submitted successfully! We'll get back to you within 2 hours.",
       {
